@@ -339,19 +339,19 @@ void Client::print_summary(void)
     printf("         %f\t%f\t\n", results_.reqps(), cfg_.req_s);
     cout << endl;
 
-    cout << "service: min\tavg\t\tstd\t\t99th\t99.9th\tmax" << endl;
-    printf("         %" PRIu64 "\t%f\t%f\t%" PRIu64 "\t%" PRIu64 "\t%" PRIu64
+    cout << "service: min\tavg\t\tstd\t50th\t99th\t99.9th\tmax" << endl;
+    printf("         %" PRIu64 "\t%f\t%f\t%" PRIu64 "\t%" PRIu64 "\t%" PRIu64 "\t%" PRIu64
            "\n",
            results_.service().min(), results_.service().mean(),
-           results_.service().stddev(), results_.service().percentile(0.99),
+           results_.service().stddev(), results_.service().percentile(0.50), results_.service().percentile(0.99),
            results_.service().percentile(0.999), results_.service().max());
     cout << endl;
 
-    cout << " buffer: min\tavg\t\tstd\t\t99th\t99.9th\tmax" << endl;
-    printf("         %" PRIu64 "\t%f\t%f\t%" PRIu64 "\t%" PRIu64 "\t%" PRIu64
+    cout << " buffer: min\tavg\t\tstd\t50th\t99th\t99.9th\tmax" << endl;
+    printf("         %" PRIu64 "\t%f\t%f\t%" PRIu64 "\t%" PRIu64 "\t%" PRIu64 "\t%" PRIu64
            "\n",
            results_.queue().min(), results_.queue().mean(),
-           results_.queue().stddev(), results_.queue().percentile(0.99),
+           results_.queue().stddev(), results_.queue().percentile(0.50), results_.queue().percentile(0.99),
            results_.queue().percentile(0.999), results_.queue().max());
 
     if (cfg_.protocol == Config::SYNTHETIC) {
@@ -395,3 +395,4 @@ void Client::record_iatimes(void)
         f.close();
     }
 }
+
